@@ -5,6 +5,7 @@ __pycache__/
 
 
 # C extensions
+serverjre/*.tar.gz
 jdk-8u92-linux-x64.tar.gz
 *.so
 
