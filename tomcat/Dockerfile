@@ -8,11 +8,11 @@ ENV TOMCAT_VERSION 8.5.3
 ENV JAVA_HOME /usr/local/jdk
 ENV CATALINA_HOME /usr/local/tomcat
 ENV PATH $CATALINA_HOME/bin:$JAVA_HOME/bin:$PATH
-COPY jdk1.8.0_02/ /usr/local/jdk/
+COPY jdk1.8.0_92/ /usr/local/jdk/
 COPY apache-tomcat-8.5.3/ /usr/local/tomcat/
 #ADD server.xml /usr/local/tomcat/conf/server.xml
-RUN useradd tomcat
-USER tomcat
+#RUN useradd tomcat
+#USER tomcat
 WORKDIR $CATALINA_HOME
 EXPOSE 8080
 CMD ["daemon.sh", "run"]
