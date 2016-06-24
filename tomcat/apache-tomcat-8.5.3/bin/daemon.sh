@@ -117,7 +117,8 @@ test ".$SERVICE_START_WAIT_TIME" = . && SERVICE_START_WAIT_TIME=10
 # Ensure that any user defined CLASSPATH variables are not used on startup,
 # but allow them to be specified in setenv.sh, in rare case when it is needed.
 CLASSPATH=
-#JAVA_OPTS="-Duser.timezone=GMT+08"
+#set timezone is CST JAVA_OPTS="-Duser.timezone=GMT+08"
+JAVA_OPTS=
 if [ -r "$CATALINA_BASE/bin/setenv.sh" ]; then
   . "$CATALINA_BASE/bin/setenv.sh"
 elif [ -r "$CATALINA_HOME/bin/setenv.sh" ]; then
