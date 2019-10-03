@@ -1,8 +1,10 @@
 #Version: tomcat 7.0.96
-#FROM alpine-jre7
-FROM morrowind/java:8u92-alpine
+FROM morro-wind:jdk7
 MAINTAINER Morro Wind "imorrowind@hotmail.com"
 
+ENV CATALINA_HOME /usr/local/tomcat
+ENV PATH $CATALINA_HOME/bin:$PATH
+ENV LD_LIBRARY_PATH $LD_LIBRARY_PATH:/lib:/usr/lib
 ENV TOMCAT_VERSION 7.0.96
 
 # runtime dependencies for Tomcat Native Libraries
@@ -18,8 +20,6 @@ RUN \
 		gnupg \
 		apr-dev \
 		apr-util-dev \
-	&& export CATALINA_HOME=/usr/local/tomcat \
-	&& export PATH=$CATALINA_HOME/bin:$PATH \
 	&& curl -fSL https://www.apache.org/dist/tomcat/tomcat-7/v$TOMCAT_VERSION/bin/apache-tomcat-$TOMCAT_VERSION.tar.gz -o apache-tomcat-$TOMCAT_VERSION.tar.gz \
 	&& curl -fSL https://www.apache.org/dist/tomcat/tomcat-7/v$TOMCAT_VERSION/bin/apache-tomcat-$TOMCAT_VERSION.tar.gz.sha512 -o apache-tomcat-$TOMCAT_VERSION.tar.gz.sha512 \
 	&& set -ex \
@@ -36,12 +36,11 @@ RUN \
 		--libdir=/usr/lib \
 		--prefix=/usr/local/tomcat \
 		--with-apr=/usr/bin/apr-1-config \
-		--with-java-home=/usr/lib/gcc/x86_64-alpine-linux-musl/8.3.0 \
+		--with-java-home=$JAVA_HOME \
 		--with-ssl=yes \
 	" \
 	&& ( \
-		export CATALINA_HOME="$PWD" \
-		&& cd "$NATIVEBUILDDIR/tomcat-native-1.2.23-src/native" \
+		cd "$NATIVEBUILDDIR/tomcat-native-1.2.23-src/native" \
 		&& pwd \
 		&& ./configure $CONFIG \
 		&& make \
@@ -60,8 +59,9 @@ RUN \
 			echo >&2 "$nativeLines"; \
 			exit 1; \
 		fi 
-COPY server.xml /usr/local/tomcat/conf/server.xml
+# COPY server.xml /usr/local/tomcat/conf/server.xml
+WORKDIR $CATALINA_HOME
 
 EXPOSE 8080
 
-CMD ["/usr/local/tomcat/bin/catalina.sh", "run"]
+CMD ["catalina.sh", "run"]
