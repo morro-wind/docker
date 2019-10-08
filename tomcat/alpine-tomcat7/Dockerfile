@@ -1,5 +1,5 @@
 #Version: tomcat 7.0.96
-FROM morro-wind:jdk7
+FROM docker.quickprs.com/jdk:alpine-jdk7
 MAINTAINER Morro Wind "imorrowind@hotmail.com"
 
 ENV CATALINA_HOME /usr/local/tomcat
