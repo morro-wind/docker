@@ -1,6 +1,6 @@
 #Version: apache-activemq-5.15.10
-FROM docker.quickprs.com/jdk:8u121-alpine
-MAINTAINER Morro Wind "imorrowind@hotmail.com"
+FROM jdk:8u121-alpine
+LABEL maintainer="Morro Wind imorrowind@hotmail.com"
 
 ENV ACTIVEMQ_HOME /usr/local/apache-activemq
 ENV PATH $ACTIVEMQ_HOME/bin:$PATH
