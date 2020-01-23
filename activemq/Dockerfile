@@ -1,5 +1,5 @@
 #Version: apache-activemq-5.15.10
-FROM jdk:8u121-alpine
+FROM lie/jdk:8u121-alpine
 LABEL maintainer="Morro Wind imorrowind@hotmail.com"
 
 ENV ACTIVEMQ_HOME /usr/local/apache-activemq
